@@ -146,14 +146,15 @@ class App extends Component {
    async sendClientRequestToGenerateKey() {
     var processId = document.getElementById("Input-client-process-id").value;
     var readerAddress = document.getElementById("Input-client-reader-address").value;
-    var gid = document.getElementById("Input-client-gid").value;
-
+    var sliceId = document.getElementById("Input-client-slice-id").value;
+    var messageId = document.getElementById("Input-client-message-id").value;
     const response = await fetch(this.api.concat("client/generateKey/"), {
       method: "POST",
       body: JSON.stringify({
         'process_id': processId,
         'reader_address': readerAddress,
-        'gid': gid
+        'message_id': messageId,
+        'slice_id': sliceId,
       }),
       headers: {
         "Content-type": "application/json; charset=UTF-8"
@@ -166,13 +167,15 @@ class App extends Component {
   async sendClientRequestToHandshake()  {
     var processId = document.getElementById("Input-client-process-id").value;
     var readerAddress = document.getElementById("Input-client-reader-address").value;
-    var gid = document.getElementById("Input-client-gid").value;
+    var sliceId = document.getElementById("Input-client-slice-id").value;
+    var messageId = document.getElementById("Input-client-message-id").value;
     const response = await fetch("http://0.0.0.0:8888/client/handshake/", {
       method: "POST",
       body: JSON.stringify({
         'process_id': processId,
         'reader_address': readerAddress,
-        'gid': gid
+        'message_id': messageId,
+        'slice_id': sliceId,
       }),
       headers: {
         "Content-type": "application/json; charset=UTF-8",
@@ -183,20 +186,18 @@ class App extends Component {
     console.log("Handshake completed")
   }
 
-  async sendReaderRequest() {
-    var processId = document.getElementById("Input-reader-process-id").value;
-    var messageId = document.getElementById("Input-reader-message-id").value;
-    var sliceId = document.getElementById("Input-reader-slice-id").value;
-    var gid = document.getElementById("Input-reader-gid").value;
-    var generate = document.getElementById("input-reader-generate").checked;
-    const response = await fetch("http://0.0.0.0:8888/read/", {
+  async sendClientRequestToAccessData () {
+    var processId = document.getElementById("Input-client-process-id").value;
+    var readerAddress = document.getElementById("Input-client-reader-address").value;
+    var sliceId = document.getElementById("Input-client-slice-id").value;
+    var messageId = document.getElementById("Input-client-message-id").value;
+    const response = await fetch("http://0.0.0.0:8888/client/handshake/", {
       method: "POST",
       body: JSON.stringify({
         'process_id': processId,
+        'reader_address': readerAddress,
         'message_id': messageId,
-        'generate': generate,
-        'gid' : gid,
-        'slice_id': sliceId
+        'slice_id': sliceId,
       }),
       headers: {
         "Content-type": "application/json; charset=UTF-8",
@@ -204,8 +205,9 @@ class App extends Component {
       }
     });
     console.log(response);
-    console.log("Reading completed")
+    console.log("Access data completed")
   }
+
 
   async connectToAPI() {
     console.log("connectToAPI");
