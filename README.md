@@ -1,8 +1,8 @@
 # CAKE-WebUI
 A React app to lunch a web interface to interact with CAKE API.
 This project is an extension of the following github repositories:
-- [MARTSIA Ethereum](https://github.com/apwbs/MARTSIA-Ethereum)
-- [MARTSIA Algorand](https://github.com/apwbs/MARTSIA-Algorand)
+- [CAKE Ethereum](https://github.com/apwbs/CAKE-Ethereum)
+- [CAKE Algorand](https://github.com/apwbs/CAKE-Algorand)
 
 ## How Lunch the application
 
